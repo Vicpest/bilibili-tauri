@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bilibili 视频工具</title>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 6v12M16 6v12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 18v2h16v-2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-frame" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m9 9 6 3-6 3V9Z" fill="currentColor"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M10 3h4l.5 2.2 1.6.9 2.2-.7 2 3.4-1.7 1.5v1.8l1.7 1.5-2 3.4-2.2-.7-1.6.9L14 20h-4l-.5-2.2-1.6-.9-2.2.7-2-3.4 1.7-1.5v-1.8L3.7 9.4l2-3.4 2.2.7 1.6-.9L10 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="11.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a4 4 0 0 0 6 .4l2-2a4 4 0 1 0-5.7-5.7l-1.1 1.1M14 11a4 4 0 0 0-6-.4l-2 2a4 4 0 0 0 5.7 5.7l1.1-1.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="9" r="1.5" fill="currentColor"/><path d="m4 17 5-5 3 3 3-4 5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark"><svg><use href="#i-play"/></svg></span><div><strong>映刻</strong><small>Bilibili 视频工具</small></div></div>
+      <button id="settings-open" class="icon-button" type="button" title="设置" aria-label="打开设置"><svg><use href="#i-settings"/></svg></button>
+    </header>
+    <div class="workspace">
+      <nav class="navigation" aria-label="功能导航">
+        <span class="nav-label">工作台</span>
+        <button class="nav-item active" type="button" data-page="download" aria-current="page"><svg><use href="#i-download"/></svg><span>解析下载</span><svg class="nav-chevron"><use href="#i-chevron"/></svg></button>
+        <button class="nav-item" type="button" data-page="frame"><svg><use href="#i-frame"/></svg><span>画面截取</span><svg class="nav-chevron"><use href="#i-chevron"/></svg></button>
+        <div class="nav-footer"><span class="footer-dot"></span> 仅保存你有权使用的视频</div>
+      </nav>
+      <main class="main-content">
+        <section id="page-download" class="page">
+          <div class="page-heading"><span class="eyebrow">VIDEO DOWNLOADER</span><h1>解析并下载视频</h1><p>粘贴 Bilibili 链接或 BV / AV 号，查看视频信息并选择清晰度。</p></div>
+          <div class="panel input-panel">
+            <label for="url" class="field-label">视频地址</label>
+            <div class="input-action"><span class="input-icon"><svg><use href="#i-link"/></svg></span><input id="url" type="text" placeholder="粘贴 Bilibili 视频链接或 BV / AV 号" autocomplete="off"/><button id="parse" class="button button-dark" type="button">解析视频</button></div>
+            <p class="field-help">支持 bilibili.com 视频页、b23.tv 短链及 BV / AV 号</p>
+          </div>
+          <div id="video" class="panel video-result hidden" aria-label="视频信息">
+            <div class="cover-wrap"><img id="cover" alt="视频封面"/><div id="cover-fallback" class="cover-fallback hidden"><svg><use href="#i-image"/></svg></div></div>
+            <div class="video-details"><span class="result-label">解析完成</span><h2 id="title"></h2><p id="video-id"></p></div>
+          </div>
+          <div class="panel download-panel">
+            <div class="section-heading"><div><span class="section-index">01</span><h2>下载选项</h2></div><span id="download-location" class="location-chip" title="保存目录"></span></div>
+            <label for="quality" class="field-label">画质清晰度</label>
+            <select id="quality" disabled><option>请先解析视频</option></select>
+            <button id="download" class="button button-accent button-wide" type="button" disabled><svg><use href="#i-download"/></svg>开始下载</button>
+            <div class="progress-wrap"><div class="progress-label"><span>下载进度</span><span id="progress-value">0%</span></div><progress id="progress" value="0" max="100"></progress><div class="progress-foot"><p id="status" role="status" aria-live="polite">等待输入视频地址</p><span id="speed"></span></div></div>
+          </div>
+        </section>
+        <section id="page-frame" class="page hidden">
+          <div class="page-heading"><span class="eyebrow">FRAME CAPTURE</span><h1>截取视频画面</h1><p>打开本地视频，拖动进度条精确定位，再将当前画面保存为 PNG。</p></div>
+          <div class="panel file-panel"><div class="file-copy"><div class="file-icon"><svg><use href="#i-folder"/></svg></div><div><span class="field-label">本地视频</span><p id="frame-file-name">尚未选择视频</p></div></div><button id="frame-browse" class="button button-outline" type="button">选择视频</button></div>
+          <div class="player-panel">
+            <div class="player-stage"><video id="preview" playsinline preload="metadata"></video><div id="player-empty" class="player-empty"><div class="empty-icon"><svg><use href="#i-frame"/></svg></div><strong>视频预览区</strong><span>选择一个本地视频开始预览</span></div></div>
+            <div class="player-controls"><button id="play-toggle" class="player-button" type="button" disabled aria-label="播放或暂停"><svg><use id="play-icon" href="#i-play"/></svg></button><span id="current-time" class="timecode">00:00</span><input id="timeline" type="range" min="0" max="0" step="0.01" value="0" disabled aria-label="视频进度"/><span id="duration" class="timecode">00:00</span></div>
+            <div class="frame-controls"><span>微调画面</span><div><button id="step-back" class="mini-button" type="button" disabled>− 0.04 秒</button><button id="step-forward" class="mini-button" type="button" disabled>+ 0.04 秒</button></div><span id="exact-time" class="exact-time">00:00.000</span></div>
+          </div>
+          <div class="capture-bottom"><div><span class="field-label">截图保存位置</span><p id="frame-location">正在获取保存目录…</p></div><button id="capture" class="button button-accent" type="button" disabled><svg><use href="#i-image"/></svg>保存当前画面</button></div>
+          <p id="frame-status" class="message" role="status" aria-live="polite"></p>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div id="settings-backdrop" class="settings-backdrop hidden"></div>
+  <aside id="settings-panel" class="settings-panel hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="drawer-heading"><div><span class="eyebrow">PREFERENCES</span><h2 id="settings-title">设置</h2></div><button id="settings-close" class="icon-button" type="button" aria-label="关闭设置"><svg><use href="#i-close"/></svg></button></div>
+    <div class="setting-group"><label for="directory" class="field-label">保存目录</label><p class="setting-help">下载的视频和截取的图片都会保存在这里。默认为程序旁的 download 文件夹。</p><input id="directory" type="text" readonly placeholder="正在获取默认目录…"/><div class="setting-actions"><button id="browse" class="button button-outline" type="button">选择目录</button><button id="reset-directory" class="text-button" type="button">恢复默认</button></div></div>
+    <div class="setting-group"><label for="ffmpeg-file" class="field-label">FFmpeg 程序</label><p class="setting-help">默认使用系统 PATH 中的 ffmpeg。若无法保存 PNG，可在这里选择完整版。</p><input id="ffmpeg-file" type="text" readonly placeholder="使用系统默认 ffmpeg"/><div class="setting-actions"><button id="ffmpeg-browse" class="button button-outline" type="button">选择程序</button><button id="ffmpeg-reset" class="text-button" type="button">使用系统默认</button></div></div>
+  </aside>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

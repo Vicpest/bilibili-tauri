@@ -1,0 +1,22 @@
+[package]
+name = "bilibili-tauri-downloader"
+version = "0.2.0"
+description = "A small Bilibili video downloader"
+authors = ["Bilibili Tauri Downloader Contributors"]
+edition = "2021"
+
+[lib]
+name = "bilibili_tauri_downloader_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-dialog = "2"
+tokio = { version = "1", features = ["process", "io-util"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+url = "2"
+base64 = "0.22"

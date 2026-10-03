@@ -1,0 +1,12 @@
+node_modules/
+.npm-cache/
+.test-tools/
+.test-download/
+dist/
+src-tauri/target/
+src-tauri/gen/schemas/
+download/
+**/download/
+.env
+.env.*
+*.log
